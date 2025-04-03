@@ -44,6 +44,7 @@ const gameListEntry = game => {
   // game.appid, .name, .img_icon_url, .rtime_last_played
   const div = document.createElement('div');
   div.className = 'games-list__game';
+  div.tabIndex = 0;
 
   // game image
   const img = document.createElement('img');

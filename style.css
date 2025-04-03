@@ -6,6 +6,7 @@ html,body {
 body {
   background: black;
   color: white;
+  font-family: sans-serif;
 }
 
 p {
@@ -42,6 +43,12 @@ p {
   display: flex;
   flex-direction: row;
   background: repeating-linear-gradient(#ffffff30 0%, #ffffff00 30%, #ffffff00 100%);
+}
+
+.games-list__game:focus {
+  outline-color: transparent;
+  outline-style: none;
+  background: linear-gradient(0, #00ffffff, #00ffff00, #00ffff00, #00ffffff);
 }
 
 .games-list__game__image {
