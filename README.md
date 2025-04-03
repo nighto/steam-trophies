@@ -2,6 +2,8 @@
 
 A web interface to display your Steam Achievements in a manner similar to PlayStation trophies.
 
+<img src="https://github.com/user-attachments/assets/14a912bf-7715-48e1-a370-cef82ca96e27" width="400"/>
+
 Please note that this project is not affiliated or endorsed with Valve or Sony.
 
 ## Configuring
