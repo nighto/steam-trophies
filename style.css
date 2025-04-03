@@ -1,0 +1,51 @@
+html,body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: black;
+  color: white;
+}
+
+p {
+  margin: 0;
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5vh;
+}
+
+.games-list__game {
+  display: flex;
+  flex-direction: row;
+}
+
+.games-list__game__image {
+  width: 20vw;
+}
+
+.games-list__game__title {
+  padding: 10px;
+  align-self: center;
+  flex-grow: 1;
+}
+
+.games-list__game__title__progress {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.games-list__game__trophies {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.games-list__game__trophies span {
+  width: 5vw;
+  text-align: center;
+}
