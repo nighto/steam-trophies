@@ -18,13 +18,34 @@ p {
   padding: 0 5vh;
 }
 
+.games-list__header {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  background: black;
+}
+
+.games-list__header__trophy {
+  width: 5vw;
+  text-align: center;
+}
+
+.games-list__header__trophy--platinum {
+  filter: grayscale(.5) hue-rotate(170deg);
+}
+
 .games-list__game {
   display: flex;
   flex-direction: row;
+  background: repeating-linear-gradient(#ffffff30 0%, #ffffff00 30%, #ffffff00 100%);
 }
 
 .games-list__game__image {
-  width: 20vw;
+  height: 60px;
 }
 
 .games-list__game__title {

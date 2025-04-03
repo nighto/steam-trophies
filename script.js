@@ -28,16 +28,13 @@ const showGamesList = data => {
   // remove loading
   document.querySelector('#loading').remove();
 
-  const gamesList = document.createElement('div');
-  gamesList.className = 'games-list';
-
   // sort by last played on top
   const sortedGames = data.response.games.sort((a, b) => b.rtime_last_played - a.rtime_last_played);
   console.log(sortedGames);
 
-  // display game list
+  // append game list
+  const gamesList = document.querySelector('#games-list');
   sortedGames.forEach(game => gamesList.appendChild(gameListEntry(game)));
-  document.body.appendChild(gamesList);
 
   // keep chainable
   return data;
