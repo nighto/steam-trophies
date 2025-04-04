@@ -38,7 +38,6 @@ const showGamesList = data => {
 
   // sort by last played on top
   const sortedGames = data.response.games.sort((a, b) => b.rtime_last_played - a.rtime_last_played);
-  console.log(sortedGames);
 
   // append game list
   const gamesList = document.querySelector('#games-list');

@@ -13,12 +13,7 @@ p {
   margin: 0;
 }
 
-.games-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.games-list__header {
+.header {
   padding: 0 5vh;
   height: 60px;
   display: flex;
@@ -30,13 +25,18 @@ p {
   background: black;
 }
 
-.games-list__header__trophy {
+.header__trophy {
   width: 5vw;
   text-align: center;
 }
 
-.games-list__header__trophy--platinum {
+.header__trophy--platinum {
   filter: grayscale(.5) hue-rotate(170deg);
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .games-list__game {
