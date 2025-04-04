@@ -34,27 +34,44 @@ p {
   filter: grayscale(.5) hue-rotate(170deg);
 }
 
-.games-list {
+.games-list,
+.achievements-list {
   display: flex;
   flex-direction: column;
+  transition: transform .7s ease, opacity .7s ease, display .7s ease allow-discrete;
+  opacity: 1;
+}
+.games-list.hidden {
+  transform-origin: center left;
+  transform: rotateY(75deg);
+  opacity: 0;
+  display: none;
 }
 
-.games-list__game {
+.games-list__game,
+.achievements-list__game,
+.achievements-list__achievement {
   padding: 0 5vh;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   background: repeating-linear-gradient(#ffffff30 0%, #ffffff00 30%, #ffffff00 100%);
 }
 
-.games-list__game:focus {
+.games-list__game:focus,
+.achievements-list__game:focus,
+.achievements-list__achievement:focus {
   outline-color: transparent;
   outline-style: none;
   position:relative;
 }
 
-.games-list__game:focus::before {
+.games-list__game:focus::before,
+.achievements-list__game:focus::before,
+.achievements-list__achievement:focus::before {
   /* trying to mimic the effect on the PSVita: a linear gradient on the top and on the bottom, plus a radial gradient centered above the top to give extra glow on the center */
-  background: linear-gradient(180deg, #00bbff99 0%, #00bbff33 30%, #00bbff33 70%, #00bbff99 100%), radial-gradient(at center -200px, #00bbff99 55%, #ffffff00 70%);
+  background: linear-gradient(180deg, #00bbff99 0%, #00bbff33 30%, #00bbff33 70%, #00bbff99 100%),
+              radial-gradient(at center -200px, #00bbff99 55%, #ffffff00 70%);
   content: "";
   position: absolute;
   top: 0;
@@ -79,14 +96,36 @@ p {
   }
 }
 
-.games-list__game__image {
+.games-list__game__image,
+.achievements-list__game__image,
+.achievements-list__achievement__image {
+  text-align: center;
+  font-size: 50px;
   height: 60px;
 }
 
-.games-list__game__title {
+.achievements-list__achievement__image {
+  padding: 0 34px;
+}
+
+.achievements-list__achievement--platinum.achievements-list__achievement--unlocked .achievements-list__achievement__image {
+  filter: grayscale(.5) hue-rotate(170deg);
+}
+
+.achievements-list__achievement--platinum.achievements-list__achievement--locked .achievements-list__achievement__image {
+  filter: grayscale(1);
+}
+
+.games-list__game__title,
+.achievements-list__game__title,
+.achievements-list__achievement__title {
   padding: 10px;
   align-self: center;
   flex-grow: 1;
+}
+
+.achievements-list__achievement__title small {
+  display: block;
 }
 
 .games-list__game__title__progress {
