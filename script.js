@@ -14,21 +14,14 @@ const OPTIONS = {
   SHOW_GAMES_WITHOUT_TROPHIES: false,
 };
 
-// TODO unify those .then calls
-const fetchGames = fetch(URL_GAMES)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error, status = ${response.status}`);
-    }
-    return response.json();
-  });
-const fetchTrophies = gameId => fetch(`${URL_TROPHIES}/${gameId}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error, status = ${response.status}`);
-    }
-    return response.json();
-  });
+const handleResponse = response => {
+  if (!response.ok) {
+    throw new Error(`HTTP error, status = ${response.status}`);
+  }
+  return response.json();
+};
+const fetchGames = fetch(URL_GAMES).then(handleResponse);
+const fetchTrophies = gameId => fetch(`${URL_TROPHIES}/${gameId}`).then(handleResponse);
 
 const filterByOptions = game => {
   if (!OPTIONS.SHOW_GAMES_NOT_PLAYED) {
@@ -37,7 +30,7 @@ const filterByOptions = game => {
     }
   }
   return true;
-}
+};
 
 const showGamesList = data => {
   // remove loading
