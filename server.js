@@ -10,11 +10,14 @@ if (!process.env.STEAM_USER_ID) {
 
 // Language to fetch achievements
 // TODO: Move configuration to FE
-const STEAM_LANGUAGE = 'en';
+const STEAM_LANGUAGE = 'english';
 
 // Steam URLs to query
-const STEAM_API_URL_GET_OWNED_GAMES = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&format=json&include_played_free_games=1&include_appinfo=1`;
-const STEAM_API_URL_GET_PLAYER_ACHIEVEMENTS = `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&l=${STEAM_LANGUAGE}&format=json`; //&appid=XXX
+const STEAM_API_URL = {
+  GET_OWNED_GAMES: `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&format=json&include_played_free_games=1&include_appinfo=1`,
+  GET_PLAYER_ACHIEVEMENTS: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&l=${STEAM_LANGUAGE}&format=json`, //&appid=XXX
+  GET_SCHEMA_FOR_GAME: `http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v0002/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&l=${STEAM_LANGUAGE}&format=json`, //&appid=XXX
+}
 
 const { createServer } = require('node:http');
 const host = '127.0.0.1';
@@ -42,7 +45,7 @@ const requestListener = (req, res) => {
   const path = req.url.split('/');
   path.shift();
   if (path[0] === 'games') {
-    fetchAndReturn(STEAM_API_URL_GET_OWNED_GAMES, res);
+    fetchAndReturn(STEAM_API_URL.GET_OWNED_GAMES, res);
   } else if (path[0] === 'trophies') {
     if (!path[1]) {
       returnError(500, 'Game id not supplied', res);
@@ -51,7 +54,18 @@ const requestListener = (req, res) => {
       if (isNaN(gameId)) {
         returnError(500, 'Invalid game id', res);
       } else {
-        fetchAndReturn(`${STEAM_API_URL_GET_PLAYER_ACHIEVEMENTS}&appid=${gameId}`, res);
+        fetchAndReturn(`${STEAM_API_URL.GET_PLAYER_ACHIEVEMENTS}&appid=${gameId}`, res);
+      }
+    }
+  } else if (path[0] === 'schema') {
+    if (!path[1]) {
+      returnError(500, 'Game id not supplied', res);
+    } else {
+      const gameId = parseInt(path[1]);
+      if (isNaN(gameId)) {
+        returnError(500, 'Invalid game id', res);
+      } else {
+        fetchAndReturn(`${STEAM_API_URL.GET_SCHEMA_FOR_GAME}&appid=${gameId}`, res);
       }
     }
   } else {
