@@ -1,4 +1,4 @@
-// run with node --env-file=.env script.js
+// run with node --env-file=.env server.js
 
 // early exit if .env is not defined
 if (!process.env.STEAM_API_KEY) {
@@ -8,13 +8,13 @@ if (!process.env.STEAM_USER_ID) {
   throw new Error('Steam User ID not defined on .env file');
 }
 
-// Steam URLs to query
-const STEAM_API_URL_GET_OWNED_GAMES = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&format=json&include_played_free_games=1&include_appinfo=1`;
-const STEAM_API_URL_GET_PLAYER_ACHIEVEMENTS = `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&l=${STEAM_LANGUAGE}&format=json`; //&appid=XXX
-
 // Language to fetch achievements
 // TODO: Move configuration to FE
 const STEAM_LANGUAGE = 'en';
+
+// Steam URLs to query
+const STEAM_API_URL_GET_OWNED_GAMES = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&format=json&include_played_free_games=1&include_appinfo=1`;
+const STEAM_API_URL_GET_PLAYER_ACHIEVEMENTS = `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_USER_ID}&l=${STEAM_LANGUAGE}&format=json`; //&appid=XXX
 
 const { createServer } = require('node:http');
 const host = '127.0.0.1';
