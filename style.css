@@ -16,10 +16,10 @@ p {
 .games-list {
   display: flex;
   flex-direction: column;
-  padding: 0 5vh;
 }
 
 .games-list__header {
+  padding: 0 5vh;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -40,6 +40,7 @@ p {
 }
 
 .games-list__game {
+  padding: 0 5vh;
   display: flex;
   flex-direction: row;
   background: repeating-linear-gradient(#ffffff30 0%, #ffffff00 30%, #ffffff00 100%);
@@ -48,7 +49,34 @@ p {
 .games-list__game:focus {
   outline-color: transparent;
   outline-style: none;
-  background: linear-gradient(0, #00ffffff, #00ffff00, #00ffff00, #00ffffff);
+  position:relative;
+}
+
+.games-list__game:focus::before {
+  /* trying to mimic the effect on the PSVita: a linear gradient on the top and on the bottom, plus a radial gradient centered above the top to give extra glow on the center */
+  background: linear-gradient(180deg, #00bbff99 0%, #00bbff33 30%, #00bbff33 70%, #00bbff99 100%), radial-gradient(at center -200px, #00bbff99 55%, #ffffff00 70%);
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom:0;
+  left: 0;
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: 9;
+  animation-timing-function: ease;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .games-list__game__image {
